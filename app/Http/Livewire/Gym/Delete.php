@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Gym;
 use App\Models\Gym;
 use Livewire\Component;
+use App\Events\UserLog;
 
 class Delete extends Component
 {
@@ -21,6 +22,9 @@ class Delete extends Component
     }
     public function delete() {
         $this->gym->delete();
+
+        $log_entry = 'Delete Gymers: "' . $this->gym->firstname . '" with an ID: ' . $this->gym->id;
+        event(new UserLog($log_entry));
 
         return redirect('/dashboard')->with('message', $this->gym->firstname . ' deleted successfully');
     }

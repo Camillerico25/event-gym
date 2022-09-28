@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Gym;
 use App\Models\Gym;
 use Livewire\Component;
+use App\Events\UserLog;
 
 class Edit extends Component
 {
@@ -32,6 +33,9 @@ class Edit extends Component
             'lastname'=> $this->lastname,
             'address'=> $this->address,
         ]);
+
+        $log_entry = 'Update Gymers: "' . $this->gym->firstname . '" with an ID: ' . $this->gym->id;
+        event(new UserLog($log_entry));
 
         return redirect('/dashboard')->with('message', $this->gym->firstname .' updated successfully');
     }

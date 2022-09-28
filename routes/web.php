@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GymController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/gym', [GymController::class, 'index']);
     Route::get('/edit/{gym}', [GymController::class, 'edit']);
     Route::get('/delete/{gym}', [GymController::class, 'destroy']);
+
+    Route::get('/logs', [SiteController::class, 'index']);
+    Route::get('/logs', [SiteController::class, 'logs'])->name('logs');
 });

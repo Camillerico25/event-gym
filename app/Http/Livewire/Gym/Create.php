@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Gym;
 
 use App\Models\Gym;
 use Livewire\Component;
+use App\Events\UserLog;
 
 class Create extends Component
 {
@@ -22,6 +23,9 @@ class Create extends Component
                 'lastname'         => $this->lastname,
                 'address'          => $this->address,
             ]);
+
+            $log_entry = 'Added Gymers: "' . $this->firstname;
+            event(new UserLog($log_entry));
 
             return redirect('/dashboard')->with('message', $this->firstname . ' added successfully');
     }
